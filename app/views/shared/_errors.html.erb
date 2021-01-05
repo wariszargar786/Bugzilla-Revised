@@ -1,0 +1,9 @@
+<div class="container mt-3">
+  <% if error.errors.any? %>
+  	<% error.errors.full_messages.each do |msg|  %>
+	  <div class="alert alert-danger" role="alert">
+	    <%= msg %>
+	  </div>
+	<% end %>
+  <% end %>
+</div>
