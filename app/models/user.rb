@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   extend FriendlyId
-  has_many :projects
+  has_many :project_users
+  has_many :projects, through: :project_users
   friendly_id :name, use: :slugged
   validates :name , presence: true, length: {minimum: 3 , maximum: 50 }
   # Include default devise modules. Others available are:
