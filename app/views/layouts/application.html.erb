@@ -11,18 +11,13 @@
 </head>
 
 <body>
-<header>
-
-</header>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<%= render 'shared/navigation' %>
 <main>
   <div class="container">
+    <%= render 'shared/success' %>
     <%= yield %>
   </div>
 </main>
-<footer>
-
-</footer>
+<%= render 'shared/footer' %>
 </body>
 </html>
