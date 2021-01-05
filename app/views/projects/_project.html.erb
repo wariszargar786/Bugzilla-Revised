@@ -3,8 +3,8 @@
     <p class="lead"><%= project.description %></p>
     <hr class="my-4">
     <p class="lead">
-      <button type="button" class="btn btn-outline-primary">Primary</button>
-      <button type="button" class="btn btn-outline-success">Success</button>
+      <%= link_to "Show" , project_path(project) ,  class: "btn btn-outline-primary" %>
+      <%= link_to "Edit" , edit_project_path(project) ,  class: "btn btn-outline-primary" %>
       <button type="button" class="btn btn-outline-danger">Danger</button>
     </p>
   </div>

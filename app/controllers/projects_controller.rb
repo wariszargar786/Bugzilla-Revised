@@ -22,7 +22,6 @@ class ProjectsController < ApplicationController
   end
   def edit
     @project = Project.friendly.find(params[:id])
-    authorize @project
   end
   def update
     project = Project.friendly.find(params[:id])
