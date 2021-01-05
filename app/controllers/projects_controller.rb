@@ -24,18 +24,17 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
   def update
-    project = Project.friendly.find(params[:id])
-    if project = project.update(params.require(:project).permit(:title , :description))
-      redirect_to projects_path, notice: 'Project is successfully updated.'
+    @project = Project.friendly.find(params[:id])
+    if @project.update(project_params)
+      redirect_to projects_path, notice: 'Project successfully updated.'
     else
       render 'edit'
     end
   end
 
-
   def add_user
     @project_id = params[:id]
-    @users = User.where(role: ['qa','developer'])
+    @users = User.where(role: [User.user_role.keys[0],User.user_role.keys[1]])
   end
   def add_user_post
     message =  'User assign to project '
@@ -48,7 +47,8 @@ class ProjectsController < ApplicationController
         project.users << user
         message= 'This user already link to this project'
       end
-      redirect_to projects_path, notice: message
+      flash[:notice] = message
+      redirect_to projects_path
     else
       render :new
     end

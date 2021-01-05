@@ -5,7 +5,6 @@
       <div class="col-md-5 mx-auto">
         <div class="card card-body">
           <%= form_for :anything, url: add_user_post_path do |form| %>
-
             <div  class="form-group required">
               <%= form.label :'Select User' %>
               <%= select_tag "anything[user_id]", options_for_select(@users.map { |s| ["#{s.name} - #{s.role}", s.id] }), class: "form-control" %>
