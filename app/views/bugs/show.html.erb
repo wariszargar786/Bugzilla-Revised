@@ -1,0 +1,25 @@
+<div class="container">
+  <ul class="list-group text-center">
+    <li class="list-group-item">Project ID : <%= @project.id %>  Project Title : <%= @project.title %></li>
+    <li class="list-group-item"><%= @project.description %></li>
+  </ul>
+</div>
+<div class="container">
+  <h2>Bug List</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Bug Type</th>
+      <th>Assign to User</th>
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render partial: 'bug', collection: @bugs %>
+    </tbody>
+  </table>
+</div>

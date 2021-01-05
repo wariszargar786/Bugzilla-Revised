@@ -1,0 +1,22 @@
+<div class="pt-1">
+  <h1 class="text-center">Add User to Project</h1>
+  <div class="container form-bottom">
+    <div class="row">
+      <div class="col-md-5 mx-auto">
+        <div class="card card-body">
+          <%= form_for :anything, url: add_user_post_path do |form| %>
+
+            <div  class="form-group required">
+              <%= form.label :'Select User' %>
+              <%= select_tag "anything[user_id]", options_for_select(@users.map { |s| ["#{s.name} - #{s.role}", s.id] }), class: "form-control" %>
+            </div>
+            <%= form.hidden_field :project_id, :value => @project_id %>
+            <div class="form-group pt-1">
+              <%= form.submit "Add User" , class: "btn btn-primary btn-block"  %>
+            </div>
+          <% end  %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

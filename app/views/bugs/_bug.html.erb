@@ -1,0 +1,17 @@
+<tr>
+  <td><%= bug.title %></td>
+  <td><%= bug.description %></td>
+  <td><%= bug.status %></td>
+  <td><%= bug.bug_type %></td>
+  <td><%= bug.bug_user.user.name if bug.bug_user  %></td>
+  <td>
+    <%= image_tag(bug.image,:class => "bug-img-preview") if bug.image.attached?%></td>
+  <td>
+    <%= link_to edit_bug_path(bug) do %>
+      <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to assign_developer_path(bug) do %>
+      <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Assign to Developer</button>
+    <% end %>
+  </td>
+</tr>

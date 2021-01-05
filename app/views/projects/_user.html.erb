@@ -1,0 +1,9 @@
+<tr>
+  <td><%= user.id %></td>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
+  <td><%= user.role %></td>
+  <td>
+    <%= button_to "Delete", delete_user_project_path(user.id ), data: { confirm: "Are you sure?" }, method: :delete,  class: "btn btn-primary" %>
+  </td>
+</tr>

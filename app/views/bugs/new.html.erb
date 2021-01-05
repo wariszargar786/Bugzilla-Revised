@@ -1,0 +1,39 @@
+<div class="pt-1">
+  <h1 class="text-center">Add Bug</h1>
+  <div class="container form-bottom">
+    <div class="row">
+      <div class="col-md-5 mx-auto">
+        <div class="card card-body">
+          <%= form_for(@bug, :url => bugs_path, :html => { :method => :post, :multipart => true }) do |f| %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <%= f.hidden_field :project_id, :value => @project.id %>
+            <div class="form-group required">
+              <%= f.label :title, class: "form-control-label" %><br/>
+              <%= f.text_field :title, autofocus: true, class: "form-control" %>
+            </div>
+            <div class="form-group required">
+              <%= f.label :description, class: "form-control-label" %>
+              <%= f.text_area :description, class: 'form-control', rows: 5 %>
+            </div>
+            <div class="form-group required">
+              <%= f.label :image, class: "form-control-label" %>
+              <%= f.file_field :image,  class: 'form-control' %>
+            </div>
+
+            <div class="form-group required">
+              <%= f.label :bug_type, class: "form-control-label" %>
+              <%= select(:bug, :bug_type ,options_for_select([['Feature', 'Feature'], ['Bug','Bug']] ), {}, { :class => 'form-control'  , :onchange => 'change_bug_type()'})  %>
+            </div>
+            <div class="form-group required">
+              <%= f.label :status , class: "form-control-label" %>
+              <%= select(:bug, :status ,options_for_select([['New', 'New'], ['Started','Started'], ['Complete','Complete']] ), {}, { :class => 'form-control' })  %>
+            </div>
+            <div class="form-group pt-1">
+              <button class="btn btn-primary btn-block" type="submit">Create</button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
