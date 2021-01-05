@@ -1,1 +1,4 @@
 <%= render @projects %>
+<div class="row">
+  <%= will_paginate(@projects, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+</div>

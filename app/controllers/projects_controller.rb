@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   def index
     user  = User.find(current_user.id)
-    @projects = user.projects
+    @projects = user.projects.paginate(page:params[:page],per_page:5)
   end
   def new
     @project = Project.new
