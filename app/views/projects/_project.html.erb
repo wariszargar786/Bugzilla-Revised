@@ -1,18 +1,10 @@
-  <tr>
-    <td><%= project.id %></td>
-    <td><%= project.title %></td>
-    <td><%= project.description %></td>
-    <td>
-      <%#= link_to project do %>
-<!--        <button type="button" class="btn btn-primary"><i class="fa fa-eye"></i></button>-->
-      <%# end %>
-      <%#= link_to edit_project_path(project) do %>
-<!--        <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>-->
-      <%# end %>
-
-      <%#= link_to add_user_path(project) do %>
-<!--        <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</button>-->
-
-      <%# end %>
-    </td>
-  </tr>
+  <div class="jumbotron">
+    <h1 class="display-4"><%= project.title %></h1>
+    <p class="lead"><%= project.description %></p>
+    <hr class="my-4">
+    <p class="lead">
+      <button type="button" class="btn btn-outline-primary">Primary</button>
+      <button type="button" class="btn btn-outline-success">Success</button>
+      <button type="button" class="btn btn-outline-danger">Danger</button>
+    </p>
+  </div>
