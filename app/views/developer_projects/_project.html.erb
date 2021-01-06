@@ -1,0 +1,8 @@
+  <div class="jumbotron">
+    <h1 class="display-4"><%= project.title %></h1>
+    <p class="lead"><%= project.description %></p>
+    <hr class="my-4">
+    <p class="lead text-center">
+      <%= link_to "Show" , developer_project_show_path(project) ,  class: "btn btn-outline-primary" %>
+    </p>
+  </div>
