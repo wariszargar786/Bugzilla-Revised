@@ -9,17 +9,5 @@
 </div>
 <h1 class="display-4 text-center">List of BUG Related to this Project</h1>
 <div class="row pb-5">
-  <% @project.bugs.each do |bug| %>
-  <div class="col-4">
-    <div class="card" >
-      <img class="card-img-top" src="<%= bug.image ? bug.image_url : ""  %>" alt="<%= bug.title %>">
-      <div class="card-body">
-        <h5 class="card-title"><%= bug.title %></h5>
-        <p class="card-text"><%= bug.description %></p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <% end %>
+  <%= render partial: 'bug', collection: @project.bugs %>
 </div>
