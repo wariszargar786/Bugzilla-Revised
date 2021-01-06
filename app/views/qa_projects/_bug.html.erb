@@ -1,15 +1,20 @@
 <div class="col-4 mb-3">
-  <div class="card" >
-    <img class="card-img-top" src="<%= bug.image ? bug.image_url : ""  %>" alt="<%= bug.title %>">
+  <div class="card">
+    <% if bug.image_url %>
+      <img class="card-img-top" src="<%= bug.image ? bug.image_url : "" %>" alt="<%= bug.title %>">
+    <% else %>
+       <%= image_tag('/no-image.jpg', :class => "card-img-top") %>
+  <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= bug.title %></h5>
       <p class="card-text"><%= bug.description %></p>
       <p class="card-text"><b>User Created : </b>  <%= bug.user.name %> </p>
       <p class="card-text"><b>User to Assign : </b>  <%= bug.bug_users.first.user.name if bug.bug_users.first %> </p>
       <div class="text-center">
-        <%= link_to "Edit Bug", bug_edit_path(bug), class:"btn btn-outline-primary" %>
-        <%= link_to "Assign to Developer", assign_developer_path(bug), class:"btn btn-outline-warning" %>
+        <%= link_to "Edit Bug", bug_edit_path(bug), class: "btn btn-outline-primary" %>
+        <%= link_to "Assign to Developer", assign_developer_path(bug), class: "btn btn-outline-warning" %>
       </div>
     </div>
   </div>
 </div>
+
