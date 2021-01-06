@@ -1,0 +1,25 @@
+<div class="form-group required">
+  <%= f.label :title, class: "form-control-label" %><br/>
+  <%= f.text_field :title, autofocus: true, class: "form-control" %>
+</div>
+<div class="form-group required">
+  <%= f.label :description, class: "form-control-label" %>
+  <%= f.text_area :description, class: 'form-control', rows: 5 %>
+</div>
+<div class="form-group required">
+  <%= f.label :bug_type, class: "form-control-label" %>
+  <%= select(:bug, :bug_type, options_for_select(Bug.bug_type.collect { |key, val| [key, key] }), {}, { :class => 'form-control', :onchange => 'change_bug_type()' }) %>
+</div>
+<div class="form-group required">
+  <%= f.label :status, class: "form-control-label" %>
+  <%= select(:bug, :status, options_for_select(Bug.status.collect { |key, val| [key, key] }), {}, { :class => 'form-control' }) %>
+</div>
+<div class="form-group">
+  <img id="img_prev" width=100% height=300 src="<%= bug.image_url != nil ? bug.image_url: "Null"  %>" class="img-thumbnail hidden <%=  bug.image_url != nil ? "": "avatar-upload-image-tag" %>"/> <br/>
+  <%= f.label :image, class: "form-control-label" %>
+  <%= f.file_field :image, id: "avatar-upload" , class:"form-control"%>
+  <%= f.hidden_field :image_cache %>
+</div>
+
+<%= bug.image_url != nil ? "Not Nil" : "Null"  %>
+
