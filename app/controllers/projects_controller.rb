@@ -10,8 +10,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    @project['user_id'] = current_user.id
     if @project.save
+      user = User.find(current_user.id)
+      user.projects << @project
       flash[:notice] = "Project created successfully"
       redirect_to projects_path
     else
@@ -21,7 +22,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.friendly.find(params[:id])
-    @users = @project.users.all
+    @users = @project.users.where.not(id:  current_user.id).paginate(page: params[:page], per_page: 5)
   end
 
   def edit
@@ -39,20 +40,20 @@ class ProjectsController < ApplicationController
 
   def add_user
     @project_id = params[:id]
-    @users = User.where(role: [User.user_role.keys[0], User.user_role.keys[1]])
+    @users = User.where(role: [User.user_role.keys[0], User.user_role.keys[2]])
   end
 
   def add_user_post
     anything = params.require(:anything).permit(:user_id, :project_id)
     project = Project.friendly.find(anything['project_id'])
-    user = User.find(anything['user_id'])
-    message = "This User #{user.name} already link to this project"
-    if user.projects.count <= 0
+    user = User.friendly.find(anything['user_id'])
+    message = "This user #{user.name} already link with this project"
+    if  project.users.where(id:user).count <=0
       user.projects << project
-      message = "User #{user.name} assign to project"
+      message = "This user #{user.name} link with this project"
     end
     flash[:notice] = message
-    redirect_to projects_path
+    redirect_to project_path(project)
   end
 
   def destroy
@@ -63,10 +64,11 @@ class ProjectsController < ApplicationController
   end
 
   def delete_user_project
-    user_id = params[:id]
-    user = User.find(user_id)
-    user.projects.clear
-    redirect_to projects_path, notice: 'User remove successfully ' + user_id
+    user = User.friendly.find(params[:uid])
+    project = Project.friendly.find(params[:pid])
+    user.projects.destroy(project)
+    flash[:notice] = "This user remove from the project"
+    redirect_to projects_path
   end
 
   private

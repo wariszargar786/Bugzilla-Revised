@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :projects
   get 'project/:id/assign', to: 'projects#add_user', as: "add_user"
   post 'project/:id/assign', to: 'projects#add_user_post', as: "add_user_post"
+  delete 'delete_user_project/:uid/:pid', to: 'projects#delete_user_project', as: "delete_user_project"
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
