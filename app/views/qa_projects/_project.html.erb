@@ -1,0 +1,11 @@
+  <div class="jumbotron">
+    <h1 class="display-4"><%= project.title %></h1>
+    <p class="lead"><%= project.description %></p>
+    <hr class="my-4">
+    <p class="lead text-center">
+      <%= link_to "Show" , qa_project_show_path(project) ,  class: "btn btn-outline-primary" %>
+      <%= link_to "Edit" , edit_project_path(project) ,  class: "btn btn-outline-success" %>
+      <%= link_to "Delete" , project_path(project) , method:"delete",data:{confirm: "Are you sure?"}, class: "btn btn-outline-warning" %>
+      <%= link_to "Assign User" , add_user_path(project) ,  class: "btn btn-outline-danger" %>
+    </p>
+  </div>
