@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'show/:id/projects', to: "qa_projects#show", as:"qa_project_show"
   get 'bug/:id/new', to:'bugs#new', as:"bug_new"
   post 'bug/:id/new', to:'bugs#create', as:"bugs"
+  get 'bug/:id/edit', to:'bugs#edit', as:"bug_edit"
+  patch 'bug/:id/edit', to:'bugs#update', as:"bug_update"
   # routes for Developer role
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
