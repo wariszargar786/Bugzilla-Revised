@@ -56,3 +56,4 @@ gem 'friendly_id', '~> 5.4.0'
 gem "pundit"
 gem 'will_paginate', '~> 3.3'
 gem 'bootstrap-will_paginate', '~> 1.0'
+gem 'carrierwave', '~> 2.0'

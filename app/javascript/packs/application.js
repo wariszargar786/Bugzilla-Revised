@@ -10,6 +10,28 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "@fortawesome/fontawesome-free/js/all";
 
+document.addEventListener("turbolinks:load", function() {
+
+
+});
+$(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img_prev').removeClass("avatar-upload-image-tag");
+                $('#img_prev').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#avatar-upload").change(function(){
+        $('#img_prev').removeClass('hidden');
+        readURL(this);
+    });
+});
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
