@@ -26,6 +26,25 @@ class BugsController < ApplicationController
       render 'edit'
     end
   end
+  def assign_developer
+    @bug =  Bug.friendly.find(params[:id])
+    @users = User.where(role:User.user_role.keys[0])
+  end
+  def assign_developer_to_bug
+    message = "Bug successfully assign to user"
+    bug_users = BugUser.new(params.require(:anything).permit(:user_id,:deadline))
+    bug = Bug.friendly.find(params[:id])
+    user = User.find(bug_users[:user_id])
+    if bug.bug_users.where.not(id: bug_users[:user_id]).count <= 0 && bug.bug_users.count <= 0
+      bug_users[:bug_id] = bug.id
+      bug_users.save
+    else
+      message = "Bug already assign"
+    end
+    flash[:notice] = message
+    redirect_to qa_project_show_path(bug.project_id)
+
+  end
 
   private
   def bug_params

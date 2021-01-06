@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post 'bug/:id/new', to:'bugs#create', as:"bugs"
   get 'bug/:id/edit', to:'bugs#edit', as:"bug_edit"
   patch 'bug/:id/edit', to:'bugs#update', as:"bug_update"
+  get 'bug/:id/assign/', to: 'bugs#assign_developer', as:"assign_developer"
+  post 'bug/:id/assign', to: 'bugs#assign_developer_to_bug', as:"assign_developer_post"
   # routes for Developer role
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
