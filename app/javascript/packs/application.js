@@ -11,8 +11,6 @@ import "channels"
 import "@fortawesome/fontawesome-free/js/all";
 
 document.addEventListener("turbolinks:load", function() {
-
-
 });
 $(function() {
     function readURL(input) {
@@ -35,3 +33,6 @@ $(function() {
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+var jQuery = require('jquery')
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;

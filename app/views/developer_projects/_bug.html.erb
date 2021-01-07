@@ -8,8 +8,8 @@
     <div class="card-body">
       <h5 class="card-title"><%= bug.title %></h5>
       <p class="card-text"><%= bug.description %></p>
-      <p class="card-text"><b>Bug Status : </b>  <%= bug.status %> </p>
       <p class="card-text"><b>Bug Type : </b>  <%= bug.bug_type %> </p>
+      <p class="card-text"><b>Bug Status : </b>  <%= bug.status %> </p>
       <div class="text-center">
         <% if !bug.bug_users.first %>
           <%= link_to "Assign to Himself", assign_himself_path(bug), class: "btn btn-outline-warning" %>

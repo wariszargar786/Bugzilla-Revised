@@ -15,10 +15,39 @@
   <%= select(:bug, :status, options_for_select(Bug.bug_status_list.collect { |key, val| [key, key] }), {}, { :class => 'form-control' }) %>
 </div>
 <div class="form-group">
-  <img id="img_prev" width=100% height=300 src="<%= bug.image_url != nil ? bug.image_url: "Null"  %>" class="img-thumbnail hidden <%=  bug.image_url != nil ? "": "avatar-upload-image-tag" %>"/> <br/>
+  <img id="img_prev" width=100% height=300 src="<%= bug.image_url != nil ? bug.image_url : "Null" %>" class="img-thumbnail hidden <%= bug.image_url != nil ? "" : "avatar-upload-image-tag" %>"/>
+  <br/>
   <%= f.label :image, class: "form-control-label" %>
-  <%= f.file_field :image, id: "avatar-upload" , class:"form-control"%>
+  <%= f.file_field :image, id: "avatar-upload", class: "form-control" %>
   <%= f.hidden_field :image_cache %>
 </div>
 
+<script>
+    function change_bug_type() {
+        $("#bug_status option[value='Complete']").remove();
+        $("#bug_status option[value='Resolved']").remove();
+        if ($('#bug_bug_type').val() == "Bug") {
+            $("#bug_status").append(new Option("Resolved", "Resolved"));
+        } else {
+            $("#bug_status").append(new Option("Complete", "Complete"));
+        }
+    }
 
+    jQuery(function ($) {
+        $(document).ready(function ($) {
+            let bug_new_edit = "<%= bug.persisted? %>"
+            if(bug_new_edit == "true"){
+                let bug_type = "<%= bug.bug_type %>"
+                document.getElementById('bug_bug_type').value = bug_type;
+                change_bug_type()
+                let bug_status = "<%= bug.status %>"
+                document.getElementById('bug_status').value = bug_status;
+            }
+            else
+            {
+                change_bug_type()
+            }
+        });
+    });
+
+</script>

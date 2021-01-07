@@ -8,8 +8,8 @@
     <div class="card-body">
       <h5 class="card-title"><%= bug.title %></h5>
       <p class="card-text"><%= bug.description %></p>
-      <p class="card-text"><b>Bug Status : </b>  <%= bug.status %> </p>
       <p class="card-text"><b>Bug Type : </b>  <%= bug.bug_type %> </p>
+      <p class="card-text"><b>Bug Status : </b>  <%= bug.status %> </p>
       <p class="card-text"><b>User Created : </b>  <%= bug.user.name %> </p>
       <p class="card-text"><b>User to Assign : </b>  <%= bug.bug_users.first.user.name if bug.bug_users.first %> </p>
       <div class="text-center">

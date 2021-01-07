@@ -1,11 +1,9 @@
 class BugsController < ApplicationController
   def new
     @bug = Bug.new
-    authorize @bug
   end
   def create
     @bug = Bug.new(bug_params)
-    authorize @bug
     project = Project.friendly.find(params[:id])
     @bug[:user_id] = current_user.id
     @bug[:project_id] =project.id
@@ -17,10 +15,10 @@ class BugsController < ApplicationController
     end
   end
   def edit
-    @bug =authorize Bug.friendly.find(params[:id])
+    @bug = Bug.friendly.find(params[:id])
   end
   def update
-    @bug =authorize Bug.friendly.find(params[:id])
+    @bug = Bug.friendly.find(params[:id])
     if @bug.update(bug_params)
       flash[:notice] = "Bug updated successfully"
       redirect_to qa_project_show_path(@bug.project_id)

@@ -2,17 +2,14 @@ class ProjectsController < ApplicationController
   def index
     user = User.find(current_user.id)
     @projects =  user.projects.paginate(page: params[:page], per_page: 5)
-    authorize @projects
   end
 
   def new
     @project = Project.new
-    authorize @project
   end
 
   def create
     @project = Project.new(project_params)
-    authorize @project
     if @project.save
       user = User.find(current_user.id)
       user.projects << @project
@@ -30,12 +27,10 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.friendly.find(params[:id])
-    authorize @project
   end
 
   def update
     @project = Project.friendly.find(params[:id])
-    authorize @project
     if @project.update(project_params)
       redirect_to projects_path, notice: 'Project successfully updated.'
     else
@@ -62,7 +57,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    project =authorize Project.friendly.find(params[:id])
+    project = Project.friendly.find(params[:id])
     project.users.clear
     project.destroy
     redirect_to projects_path, notice: 'Project deleted successfully'
