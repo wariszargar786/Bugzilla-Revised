@@ -15,7 +15,10 @@
           <%= link_to "Assign to Himself", assign_himself_path(bug), class: "btn btn-outline-warning" %>
         <% end %>
         <% if bug.bug_users.first && bug.bug_users.first.id = current_user.id %>
-          <%= link_to "Mark as #{bug.bug_type == 'Bug' ? 'Solved' : "Complete" }", bug_solved_path(bug), class: "btn btn-outline-primary" %>
+          <% if bug.status == "#{Bug.bug_status_list.keys[3]}" || bug.status == "#{Bug.bug_status_list.keys[2]}" %>
+          <% else %>
+            <%= link_to "Mark as #{bug.bug_type == 'Bug' ? 'Solved' : "Complete" }", bug_solved_path(bug), class: "btn btn-outline-primary" %>
+          <% end %>
         <% end %>
       </div>
     </div>
