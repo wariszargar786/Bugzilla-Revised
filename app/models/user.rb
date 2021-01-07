@@ -14,8 +14,6 @@ class User < ApplicationRecord
   def before_save
     self.email = email.downcase
   end
-  def user_role
-  end
   def self.user_role
     { Developer: 1, Manager: 2, QA: 3 }
   end
