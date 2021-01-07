@@ -8,7 +8,7 @@ class Bug < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: {minimum: 3 , maximum: 200}
   validates :description, presence: true, length: {minimum: 3 , maximum: 1000}
   enum bug_type: { Feature: 1, Bug: 2 }
-  enum status: { New: 1, Started: 2, Complete: 3, Resolved: 3 }
+  enum status: { New: 1, Started: 2, Complete: 3, Resolved: 4 }
   def self.bug_type_list
     {  Bug: 1, Feature: 2 }
   end

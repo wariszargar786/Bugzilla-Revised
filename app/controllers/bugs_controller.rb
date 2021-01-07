@@ -28,7 +28,7 @@ class BugsController < ApplicationController
   end
   def assign_developer
     @bug =  Bug.friendly.find(params[:id])
-    @users = User.where(role:User.user_role.keys[0])
+    @users = @bug.project.users.where(role:User.user_role.keys[0])
   end
   def assign_developer_to_bug
     message = "Bug successfully assign to user"
