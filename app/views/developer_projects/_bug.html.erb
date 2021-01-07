@@ -15,7 +15,7 @@
           <%= link_to "Assign to Himself", assign_developer_path(bug), class: "btn btn-outline-warning" %>
         <% end %>
         <% if bug.bug_users.first && bug.bug_users.first.id = current_user.id %>
-          <%= link_to "Mark as Solved", bug_solved_path(bug), class: "btn btn-outline-primary" %>
+          <%= link_to "Mark as #{bug.bug_type == 'Bug' ? 'Solved' :"Complete" }", bug_solved_path(bug), class: "btn btn-outline-primary" %>
         <% end %>
       </div>
     </div>
