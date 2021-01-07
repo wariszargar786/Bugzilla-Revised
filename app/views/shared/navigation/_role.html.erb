@@ -7,12 +7,14 @@
       Project
     </a>
     <div class="dropdown-menu <%= is_active('about') %>" aria-labelledby="navbarDropdown">
-      <%= link_to "New", new_project_path, class: "dropdown-item" %>
+      <% if policy(Project).new? %>
+        <%= link_to "New", new_project_path, class: "dropdown-item" %>
+      <% end %>
       <%= link_to "List", projects_path, class: "dropdown-item" %>
     </div>
   </li>
   <li class="nav-item ">
-  <%= link_to "QA Project List", qa_project_path, class: "nav-link" %>
+    <%= link_to "QA Project List", qa_project_path, class: "nav-link" %>
   </li>
   <li class="nav-item ">
     <%= link_to "Developer Project List", developer_project_path, class: "nav-link" %>
