@@ -6,4 +6,10 @@ class DeveloperProjectsController < ApplicationController
   def show
     @project = Project.friendly.find(params[:id])
   end
+  def solved
+    @bug = Bug.friendly.find(params[:id])
+    flash[:notice] = @bug
+    @project = Project.find(@bug.project_id)
+    redirect_to developer_project_path
+  end
 end

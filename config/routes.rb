@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   # routes for Developer role
   get 'project/list', to: "developer_projects#index", as:"developer_project"
   get 'show/:id/project', to: "developer_projects#show", as:"developer_project_show"
+  get 'bug/:id/solved', to:"developer_projects#solved", as: "bug_solved"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
