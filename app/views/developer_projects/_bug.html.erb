@@ -12,7 +12,7 @@
       <p class="card-text"><b>Bug Type : </b>  <%= bug.bug_type %> </p>
       <div class="text-center">
         <% if !bug.bug_users.first %>
-          <%= link_to "Assign to Himself", assign_developer_path(bug), class: "btn btn-outline-warning" %>
+          <%= link_to "Assign to Himself", assign_himself_path(bug), class: "btn btn-outline-warning" %>
         <% end %>
         <% if bug.bug_users.first && bug.bug_users.first.id = current_user.id %>
           <%= link_to "Mark as #{bug.bug_type == 'Bug' ? 'Solved' :"Complete" }", bug_solved_path(bug), class: "btn btn-outline-primary" %>

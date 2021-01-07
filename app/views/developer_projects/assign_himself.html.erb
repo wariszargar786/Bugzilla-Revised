@@ -1,0 +1,20 @@
+<div class="pt-1">
+  <h1 class="text-center">Assign Bug to Himself</h1>
+  <div class="container form-bottom">
+    <div class="row">
+      <div class="col-md-5 mx-auto">
+        <div class="card card-body">
+          <%= form_for :anything, url: assign_himself_post_path(@bug) do |form| %>
+            <div  class="form-group">
+              <%= form.label :'Deadline' %>
+              <%= date_field(:anything, :deadline, class:"form-control" )  %>
+            </div>
+            <div class="form-group pt-1">
+              <%= form.submit "Assign Himself" , class: "btn btn-primary btn-block"  %>
+            </div>
+          <% end  %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

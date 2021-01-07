@@ -32,5 +32,7 @@ Rails.application.routes.draw do
   get 'project/list', to: "developer_projects#index", as:"developer_project"
   get 'show/:id/project', to: "developer_projects#show", as:"developer_project_show"
   get 'bug/:id/solved', to:"developer_projects#solved", as: "bug_solved"
+  get 'bug/:id/assignhimself/', to: 'developer_projects#assign_himself', as:"assign_himself"
+  post 'bug/:id/assignhimself/', to: 'developer_projects#assign_himself_post', as:"assign_himself_post"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
