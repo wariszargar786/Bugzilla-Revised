@@ -1,8 +1,10 @@
 class BugsController < ApplicationController
   def new
+    authorize! :new, BugsController
     @bug = Bug.new
   end
   def create
+    authorize! :create, BugsController
     @bug = Bug.new(bug_params)
     project = Project.friendly.find(params[:id])
     @bug[:user_id] = current_user.id
@@ -15,9 +17,11 @@ class BugsController < ApplicationController
     end
   end
   def edit
+    authorize! :edit, BugsController
     @bug = Bug.friendly.find(params[:id])
   end
   def update
+    authorize! :update, BugsController
     @bug = Bug.friendly.find(params[:id])
     if @bug.update(bug_params)
       flash[:notice] = "Bug updated successfully"
@@ -26,12 +30,14 @@ class BugsController < ApplicationController
       render 'edit'
     end
   end
-
   def assign_developer
+    authorize! :assign_developer, BugsController
     @bug =  Bug.friendly.find(params[:id])
     @users = @bug.project.users.where(role:User.user_role.keys[0])
   end
   def assign_developer_to_bug
+    authorize! :assign_developer_to_bug, BugsController
+
     message = "Bug successfully assign to user"
     bug_users = BugUser.new(params.require(:anything).permit(:user_id,:deadline))
     bug = Bug.friendly.find(params[:id])
@@ -46,7 +52,6 @@ class BugsController < ApplicationController
     redirect_to qa_project_show_path(bug.project_id)
 
   end
-
   private
   def bug_params
     params.require(:bug).permit(:title , :description,:bug_type , :status ,:image)

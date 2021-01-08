@@ -1,9 +1,14 @@
-  <div class="jumbotron">
-    <h1 class="display-4"><%= project.title %></h1>
-    <p class="lead"><%= project.description %></p>
-    <hr class="my-4">
-    <p class="lead text-center">
-      <%= link_to "Show" , qa_project_show_path(project) ,  class: "btn btn-outline-primary" %>
-      <%= link_to "Report Bug" , bug_new_path(project) ,  class: "btn btn-outline-danger" %>
-    </p>
-  </div>
+<div class="jumbotron">
+  <h1 class="display-4"><%= project.title %></h1>
+  <p class="lead"><%= project.description %></p>
+  <hr class="my-4">
+  <p class="lead text-center">
+    <% if can? :show, QaProjectsController %>
+      <%= link_to "Show", qa_project_show_path(project), class: "btn btn-outline-primary" %>
+    <% end %>
+    <% if can? :new, BugsController %>
+      <%= link_to "Report Bug", bug_new_path(project), class: "btn btn-outline-danger" %>
+    <% end %>
+
+  </p>
+</div>
