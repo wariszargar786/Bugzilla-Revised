@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   # routes for login registration edit account logout etc
   devise_for :users,path: '', path_names: { sign_in: 'login', sign_out: 'logout' , sign_up: 'register' }
 
-  # Routes redirect after login
-  get "dashboard", to:'dashboard#index',as: 'dashboard'
-
   # general routes for pages controller
   get 'about' ,to: 'pages#about', as:'about'
   get 'contact' ,to: 'pages#contact', as:'contact'
