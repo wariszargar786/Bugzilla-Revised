@@ -15,13 +15,12 @@
   <%= select(:bug, :status, options_for_select(Bug.bug_status_list.collect { |key, val| [key, key] }), {}, { :class => 'form-control' }) %>
 </div>
 <div class="form-group">
-  <img id="img_prev" width=100% height=300 src="<%= bug.image_url != nil ? bug.image_url : "Null" %>" class="img-thumbnail hidden <%= bug.image_url != nil ? "" : "avatar-upload-image-tag" %>"/>
+  <img id="img_prev" width=100% height=300 src="<%= bug.image_url != nil ? bug.image_url : "Null" %>" class="img-thumbnail  <%= bug.image_url != nil ? "" : "avatar-upload-image-tag" %>"/>
   <br/>
   <%= f.label :image, class: "form-control-label" %>
   <%= f.file_field :image, id: "avatar-upload", class: "form-control" %>
   <%= f.hidden_field :image_cache %>
 </div>
-
 <script>
     function change_bug_type() {
         $("#bug_status option[value='Complete']").remove();
