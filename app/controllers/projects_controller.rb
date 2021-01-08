@@ -75,7 +75,11 @@ class ProjectsController < ApplicationController
   def destroy
     authorize! :destroy, ProjectsController
     project = Project.friendly.find(params[:id])
-    project.users.clear
+    project.bugs.each do |bug|
+      bug.bug_users.destroy_all
+    end
+    project.bugs.destroy_all
+    project.users.destroy_all
     project.destroy
     redirect_to projects_path, notice: 'Project deleted successfully'
   end
