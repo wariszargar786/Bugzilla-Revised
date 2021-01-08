@@ -1,15 +1,4 @@
 class DeveloperProjectsController < ApplicationController
-  def index
-    user = User.find(current_user.id)
-    @projects = user.projects.paginate(page: params[:page], per_page: 5)
-    authorize! :index, DeveloperProjectsController
-  end
-
-  def show
-    authorize! :show, DeveloperProjectsController
-    @project = Project.friendly.find(params[:id])
-  end
-
   def solved
     authorize! :solved, DeveloperProjectsController
     @bug = Bug.friendly.find(params[:id])
@@ -21,14 +10,12 @@ class DeveloperProjectsController < ApplicationController
     @bug.save
     @project = Project.find(@bug.project_id)
     flash[:notice] = "Mark as #{@bug.status}"
-    redirect_to developer_project_show_path(@bug.project_id)
+    redirect_to project_path(@bug.project_id)
   end
-
   def assign_himself
     authorize! :assign_himself, DeveloperProjectsController
     @bug = Bug.friendly.find(params[:id])
   end
-
   def assign_himself_post
     authorize! :assign_himself_post, DeveloperProjectsController
     bug_users = BugUser.new(params.require(:anything).permit(:deadline))
@@ -37,6 +24,6 @@ class DeveloperProjectsController < ApplicationController
     bug_users[:user_id] = current_user.id
     bug_users.save
     flash[:notice] = "Bug assign to himself successfully"
-    redirect_to developer_project_show_path(bug.project_id)
+    redirect_to project_path(bug.project_id)
   end
 end

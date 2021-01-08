@@ -20,7 +20,6 @@ Rails.application.routes.draw do
 
 
   # routes for QA role
-  get 'list/projects', to: "qa_projects#index", as:"qa_project"
   get 'show/:id/projects', to: "qa_projects#show", as:"qa_project_show"
   get 'bug/:id/new', to:'bugs#new', as:"bug_new"
   post 'bug/:id/new', to:'bugs#create', as:"bugs"
@@ -29,7 +28,6 @@ Rails.application.routes.draw do
   get 'bug/:id/assign/', to: 'bugs#assign_developer', as:"assign_developer"
   post 'bug/:id/assign', to: 'bugs#assign_developer_to_bug', as:"assign_developer_post"
   # routes for Developer role
-  get 'project/list', to: "developer_projects#index", as:"developer_project"
   get 'show/:id/project', to: "developer_projects#show", as:"developer_project_show"
   get 'bug/:id/solved', to:"developer_projects#solved", as: "bug_solved"
   get 'bug/:id/assignhimself/', to: 'developer_projects#assign_himself', as:"assign_himself"

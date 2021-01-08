@@ -1,14 +1,21 @@
 class ProjectsController < ApplicationController
   def index
-    user = User.find(current_user.id)
-    @projects =  user.projects.paginate(page: params[:page], per_page: 5)
+    @user = User.find(current_user.id)
+    # Developer or Manager
+    if @user.role == "#{User.user_role.keys[0]}" || @user.role == "#{User.user_role.keys[1]}"
+      @projects = @user.projects.paginate(page: params[:page], per_page: 5)
+      # QA
+    elsif @user.role == "#{User.user_role.keys[2] }" # QA
+      @projects = Project.paginate(page: params[:page], per_page: 5)
+    else
+      @projects = nil?
+    end
     authorize! :index, ProjectsController
   end
 
   def new
     @project = Project.new
     authorize! :new, ProjectsController
-
   end
 
   def create
@@ -27,7 +34,7 @@ class ProjectsController < ApplicationController
   def show
     authorize! :show, ProjectsController
     @project = Project.friendly.find(params[:id])
-    @users = @project.users.where.not(id:  current_user.id).paginate(page: params[:page], per_page: 5)
+    @users = @project.users.where.not(id: current_user.id).paginate(page: params[:page], per_page: 5)
   end
 
   def edit
@@ -57,7 +64,7 @@ class ProjectsController < ApplicationController
     project = Project.friendly.find(anything['project_id'])
     user = User.friendly.find(anything['user_id'])
     message = "This user #{user.name} already link with this project"
-    if  project.users.where(id:user).count <=0
+    if project.users.where(id: user).count <= 0
       user.projects << project
       message = "This user #{user.name} link with this project"
     end

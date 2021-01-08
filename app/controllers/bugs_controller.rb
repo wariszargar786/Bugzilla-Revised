@@ -4,7 +4,6 @@ class BugsController < ApplicationController
     @bug = Bug.new
   end
   def create
-    authorize! :create, BugsController
     @bug = Bug.new(bug_params)
     project = Project.friendly.find(params[:id])
     @bug[:user_id] = current_user.id
@@ -15,6 +14,7 @@ class BugsController < ApplicationController
     else
       render 'new'
     end
+    authorize! :create, BugsController
   end
   def edit
     authorize! :edit, BugsController

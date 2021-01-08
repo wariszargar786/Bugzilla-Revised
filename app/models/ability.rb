@@ -2,19 +2,23 @@ class Ability
   include CanCan::Ability
   def initialize(user)
     if user
+      if user.Manager? or user.Developer? or user.QA?
+        can :index, ProjectsController
+        can :show, ProjectsController
+      end
+      if user.Developer? or user.QA?
+        can :show_list_bugs, BugsController
+      end
       if user.Developer?
-        can :index, DeveloperProjectsController
-        can :show, DeveloperProjectsController
         can :solved, DeveloperProjectsController
         can :assign_himself, DeveloperProjectsController
         can :assign_himself_post, DeveloperProjectsController
       end
       if user.Manager?
-        can :index, ProjectsController
         can :new, ProjectsController
+        can :show_list_user, ProjectsController
         can :create, ProjectsController
         can :edit, ProjectsController
-        can :show, ProjectsController
         can :update, ProjectsController
         can :add_user, ProjectsController
         can :add_user_post, ProjectsController
@@ -23,7 +27,6 @@ class Ability
       end
       if user.QA?
         can :index, QaProjectsController
-        can :show, QaProjectsController
         can :new, BugsController
         can :create, BugsController
         can :edit, BugsController

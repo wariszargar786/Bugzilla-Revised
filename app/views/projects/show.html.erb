@@ -3,7 +3,7 @@
   <p class="lead"><%= @project.description %></p>
   <hr class="my-4">
   <p class="lead text-center">
-    <%= link_to "Back" , projects_path ,  class: "btn btn-outline-info" %>
+    <%= link_to "Back", projects_path, class: "btn btn-outline-info" %>
     <% if can? :edit, ProjectsController %>
       <%= link_to "Edit", edit_project_path(@project), class: "btn btn-outline-success" %>
     <% end %>
@@ -13,9 +13,19 @@
     <% if can? :add_user, ProjectsController %>
       <%= link_to "Assign User", add_user_path(@project), class: "btn btn-outline-danger" %>
     <% end %>
+    <% if can? :new, BugsController %>
+      <%= link_to "Report Bug", bug_new_path(@project), class: "btn btn-outline-danger" %>
+    <% end %>
   </p>
 </div>
-
-<h1 class="display-4 text-center">List of User Assign to this Project</h1>
-<%= render partial: 'user', collection: @users %>
-<%= render 'shared/pagination', pagination:@users %>
+<% if can? :show_list_user, ProjectsController %>
+  <h1 class="display-4 text-center">List of User Assign to this Project</h1>
+  <%= render partial: 'user', collection: @users %>
+<% end %>
+<% if can? :show_list_bugs, BugsController %>
+  <h1 class="display-4 text-center">List of BUG Related to this Project</h1>
+  <div class="row pb-5">
+    <%= render partial: 'bug', collection: @project.bugs %>
+  </div>
+<% end %>
+<%= render 'shared/pagination', pagination: @users %>
