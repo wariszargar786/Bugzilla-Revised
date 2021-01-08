@@ -26,7 +26,6 @@ class Ability
         can :delete_user_project, ProjectsController
       end
       if user.QA?
-        can :index, QaProjectsController
         can :new, BugsController
         can :create, BugsController
         can :edit, BugsController

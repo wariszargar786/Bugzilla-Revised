@@ -20,7 +20,6 @@ Rails.application.routes.draw do
 
 
   # routes for QA role
-  get 'show/:id/projects', to: "qa_projects#show", as:"qa_project_show"
   get 'bug/:id/new', to:'bugs#new', as:"bug_new"
   post 'bug/:id/new', to:'bugs#create', as:"bugs"
   get 'bug/:id/edit', to:'bugs#edit', as:"bug_edit"

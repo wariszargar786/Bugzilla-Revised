@@ -5,16 +5,16 @@ class BugsController < ApplicationController
   end
   def create
     @bug = Bug.new(bug_params)
-    project = Project.friendly.find(params[:id])
+    @project = Project.friendly.find(params[:id])
     @bug[:user_id] = current_user.id
-    @bug[:project_id] =project.id
+    @bug[:project_id] =@project.id
+    authorize! :create, BugsController
     if @bug.save
       flash[:notice] = 'Bug successfully created'
-      redirect_to qa_project_show_path(project)
+      redirect_to project_path(@project)
     else
       render 'new'
     end
-    authorize! :create, BugsController
   end
   def edit
     authorize! :edit, BugsController
@@ -25,7 +25,7 @@ class BugsController < ApplicationController
     @bug = Bug.friendly.find(params[:id])
     if @bug.update(bug_params)
       flash[:notice] = "Bug updated successfully"
-      redirect_to qa_project_show_path(@bug.project_id)
+      redirect_to project_path(@bug.project_id)
     else
       render 'edit'
     end
@@ -49,7 +49,7 @@ class BugsController < ApplicationController
       message = "Bug already assign"
     end
     flash[:notice] = message
-    redirect_to qa_project_show_path(bug.project_id)
+    redirect_to project_path(bug.project_id)
 
   end
   private
