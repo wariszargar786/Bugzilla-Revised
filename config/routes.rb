@@ -1,21 +1,16 @@
 Rails.application.routes.draw do
   # root route or landing page or home page
   root 'pages#home'
-
   # routes for login registration edit account logout etc
   devise_for :users,path: '', path_names: { sign_in: 'login', sign_out: 'logout' , sign_up: 'register' }
-
   # general routes for pages controller
   get 'about' ,to: 'pages#about', as:'about'
   get 'contact' ,to: 'pages#contact', as:'contact'
-
   # routes for Manager role
   resources :projects
   get 'project/:id/assign', to: 'projects#add_user', as: "add_user"
   post 'project/:id/assign', to: 'projects#add_user_post', as: "add_user_post"
   delete 'delete_user_project/:uid/:pid', to: 'projects#delete_user_project', as: "delete_user_project"
-
-
   # routes for QA role
   get 'bug/:id/new', to:'bugs#new', as:"bug_new"
   post 'bug/:id/new', to:'bugs#create', as:"bugs"
