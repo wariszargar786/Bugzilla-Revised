@@ -32,6 +32,8 @@ class Ability
         can :update, BugsController
         can :assign_developer, BugsController
         can :assign_developer_to_bug, BugsController
+        can :reassign_developer, BugsController
+        can :reassign_developer_to_bug, BugsController
       end
     end
   end

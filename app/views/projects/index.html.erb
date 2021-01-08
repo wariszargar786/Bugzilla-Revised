@@ -1,2 +1,5 @@
 <%= render @projects %>
+<% if @projects.count <= 0 %>
+  <h1 class="text-center"> Sorry you are not associated with any project. </h1>
+<% end %>
 <%= render 'shared/pagination', pagination:@projects %>

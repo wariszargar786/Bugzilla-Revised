@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   get 'bug/:id/edit', to:'bugs#edit', as:"bug_edit"
   patch 'bug/:id/edit', to:'bugs#update', as:"bug_update"
   get 'bug/:id/assign/', to: 'bugs#assign_developer', as:"assign_developer"
+  get 'bug/:id/reassign/', to: 'bugs#reassign_developer', as:"re_assign_developer"
   post 'bug/:id/assign', to: 'bugs#assign_developer_to_bug', as:"assign_developer_post"
+  post 'bug/:id/reassign', to: 'bugs#reassign_developer_to_bug', as:"reassign_developer_post"
   # routes for Developer role
   get 'show/:id/project', to: "developer_projects#show", as:"developer_project_show"
   get 'bug/:id/solved', to:"developer_projects#solved", as: "bug_solved"

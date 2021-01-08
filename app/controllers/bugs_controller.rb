@@ -39,8 +39,17 @@ class BugsController < ApplicationController
     @bug = Bug.friendly.find(params[:id])
     @users = @bug.project.users.where(role: User.user_role.keys[0])
   end
+  def reassign_developer
+    authorize! :reassign_developer, BugsController
+    @bug = Bug.friendly.find(params[:id])
+    @bug_user = BugUser.new
+    @users = @bug.project.users.where(role: User.user_role.keys[0])
+  end
+
+
   def assign_developer_to_bug
     authorize! :assign_developer_to_bug, BugsController
+    session[:notice] = nil
     message = "Bug successfully assign to user"
     @bug_users = BugUser.new(bu_user_params)
     @bug = Bug.friendly.find(params[:id])
@@ -59,6 +68,26 @@ class BugsController < ApplicationController
     end
   end
 
+  def reassign_developer_to_bug
+    authorize! :reassign_developer_to_bug, BugsController
+    session[:notice] = nil
+    message = "Bug successfully assign to user"
+    @bug_users = BugUser.new(bu_user_params)
+    @bug = Bug.friendly.find(params[:id])
+    @users = @bug.project.users.where(role: User.user_role.keys[0])
+    if @bug.bug_users.where.not(id: @bug_users[:user_id]).count <= 0 && @bug.bug_users.count <= 0
+      @bug_users[:bug_id] = @bug.id
+    else
+      message = "Bug already assign"
+    end
+    if @bug_users.save
+      flash[:notice] = message
+      redirect_to project_path(@bug.project_id)
+    else
+      session[:notice] =  "Please provide both user & date time"
+      render 'assign_developer'
+    end
+  end
   private
 
   def bug_params

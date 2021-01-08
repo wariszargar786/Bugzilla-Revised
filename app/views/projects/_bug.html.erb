@@ -19,7 +19,9 @@
         <% if can? :assign_developer, BugsController %>
           <% if !bug.bug_users.first %>
             <%= link_to "Assign to Developer", assign_developer_path(bug), class: "btn btn-outline-warning" %>
-          <% end %>
+            <%# else %>
+            <%#= link_to "Re assign to Developer", re_assign_developer_path(bug), class: "btn btn-outline-warning" %>
+      <% end %>
         <% end %>
 
 
