@@ -54,7 +54,7 @@ class BugsController < ApplicationController
       flash[:notice] = message
       redirect_to project_path(@bug.project_id)
     else
-      flash[:notice] = "Please provide both user & date time"
+      session[:notice] =  "Please provide both user & date time"
       render 'assign_developer'
     end
   end

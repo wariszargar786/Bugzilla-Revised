@@ -1,14 +1,18 @@
 <div class="pt-1">
+  <% if session[:notice]  %>
+    <div class="alert alert-danger" role="alert">
+      <%= session[:notice] %>
+    </div>
+  <% end %>
   <h1 class="text-center">Assign <%= @bug.bug_type %> to Himself</h1>
   <div class="container form-bottom">
     <div class="row">
       <div class="col-md-5 mx-auto">
         <div class="card card-body">
-          <%= form_for :anything, url: assign_himself_post_path(@bug) do |form| %>
+          <%= form_for :@bug_user, url: assign_himself_post_path(@bug) do |form| %>
             <div  class="form-group">
               <%= form.label :'Deadline' %>
-              <%= date_field(:anything, :deadline, class:"form-control" )  %>
-            </div>
+              <%= date_field(:bug_user, :deadline, class: "form-control" , min: 0.days.ago, max: 1.year.from_now) %>            </div>
             <div class="form-group pt-1">
               <%= form.submit "Assign Himself" , class: "btn btn-primary btn-block"  %>
             </div>

@@ -15,15 +15,21 @@ class DeveloperProjectsController < ApplicationController
   def assign_himself
     authorize! :assign_himself, DeveloperProjectsController
     @bug = Bug.friendly.find(params[:id])
+    @bug_user = BugUser.new
   end
   def assign_himself_post
+    session[:notice] = nil
     authorize! :assign_himself_post, DeveloperProjectsController
-    bug_users = BugUser.new(params.require(:anything).permit(:deadline))
-    bug = Bug.friendly.find(params[:id])
-    bug_users[:bug_id] = bug.id
-    bug_users[:user_id] = current_user.id
-    bug_users.save
+    @bug_users = BugUser.new(params.require(:bug_user).permit(:deadline))
+    @bug = Bug.friendly.find(params[:id])
+    @bug_users[:bug_id] = @bug.id
+    @bug_users[:user_id] = current_user.id
+    if @bug_users.save
     flash[:notice] = "Bug assign to himself successfully"
-    redirect_to project_path(bug.project_id)
+    redirect_to project_path(@bug.project_id)
+    else
+      session[:notice] = "Please provide date"
+      render 'assign_himself'
+    end
   end
 end
