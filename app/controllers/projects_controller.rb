@@ -2,13 +2,17 @@ class ProjectsController < ApplicationController
   def index
     user = User.find(current_user.id)
     @projects =  user.projects.paginate(page: params[:page], per_page: 5)
+    authorize! :index, ProjectsController
   end
 
   def new
     @project = Project.new
+    authorize! :new, ProjectsController
+
   end
 
   def create
+    authorize! :create, ProjectsController
     @project = Project.new(project_params)
     if @project.save
       user = User.find(current_user.id)
@@ -21,15 +25,18 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    authorize! :show, ProjectsController
     @project = Project.friendly.find(params[:id])
     @users = @project.users.where.not(id:  current_user.id).paginate(page: params[:page], per_page: 5)
   end
 
   def edit
+    authorize! :edit, ProjectsController
     @project = Project.friendly.find(params[:id])
   end
 
   def update
+    authorize! :update, ProjectsController
     @project = Project.friendly.find(params[:id])
     if @project.update(project_params)
       redirect_to projects_path, notice: 'Project successfully updated.'
@@ -39,11 +46,13 @@ class ProjectsController < ApplicationController
   end
 
   def add_user
+    authorize! :add_user, ProjectsController
     @project_id = params[:id]
     @users = User.where(role: [User.user_role.keys[0], User.user_role.keys[2]])
   end
 
   def add_user_post
+    authorize! :add_user_post, ProjectsController
     anything = params.require(:anything).permit(:user_id, :project_id)
     project = Project.friendly.find(anything['project_id'])
     user = User.friendly.find(anything['user_id'])
@@ -57,6 +66,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, ProjectsController
     project = Project.friendly.find(params[:id])
     project.users.clear
     project.destroy
@@ -64,6 +74,7 @@ class ProjectsController < ApplicationController
   end
 
   def delete_user_project
+    authorize! :delete_user_project, ProjectsController
     user = User.friendly.find(params[:uid])
     project = Project.friendly.find(params[:pid])
     user.projects.destroy(project)

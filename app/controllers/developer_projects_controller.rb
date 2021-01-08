@@ -2,13 +2,16 @@ class DeveloperProjectsController < ApplicationController
   def index
     user = User.find(current_user.id)
     @projects = user.projects.paginate(page: params[:page], per_page: 5)
+    authorize! :index, DeveloperProjectsController
   end
 
   def show
+    authorize! :show, DeveloperProjectsController
     @project = Project.friendly.find(params[:id])
   end
 
   def solved
+    authorize! :solved, DeveloperProjectsController
     @bug = Bug.friendly.find(params[:id])
     if @bug.bug_type == "#{Bug.bug_type_list.keys[0]}"
       @bug[:status] = Bug.bug_status_list.keys[3]
@@ -22,10 +25,12 @@ class DeveloperProjectsController < ApplicationController
   end
 
   def assign_himself
+    authorize! :assign_himself, DeveloperProjectsController
     @bug = Bug.friendly.find(params[:id])
   end
 
   def assign_himself_post
+    authorize! :assign_himself_post, DeveloperProjectsController
     bug_users = BugUser.new(params.require(:anything).permit(:deadline))
     bug = Bug.friendly.find(params[:id])
     bug_users[:bug_id] = bug.id

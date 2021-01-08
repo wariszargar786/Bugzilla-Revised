@@ -1,26 +1,24 @@
 <ul class="navbar-nav mr-auto">
-  <li class="nav-item ">
-    <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>
-  </li>
-  <% if current_user.role == "#{User.user_role.keys[0]}" %>
+  <% if can? :index, DeveloperProjectsController %>
+    <li class="nav-item ">
+      <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>
+    </li>
     <li class="nav-item ">
       <%= link_to "Project List", developer_project_path, class: "nav-link" %>
     </li>
   <% end %>
-  <% if current_user.role == "#{User.user_role.keys[1]}" %>
+  <% if can? :index, ProjectsController %>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Project
       </a>
       <div class="dropdown-menu <%= is_active('about') %>" aria-labelledby="navbarDropdown">
-        <% if policy(Project).new? %>
-          <%= link_to "New", new_project_path, class: "dropdown-item" %>
-        <% end %>
+        <%= link_to "New", new_project_path, class: "dropdown-item" %>
         <%= link_to "List", projects_path, class: "dropdown-item" %>
       </div>
     </li>
   <% end %>
-  <% if current_user.role == "#{User.user_role.keys[2]}" %>
+  <% if can? :index, QaProjectsController %>
     <li class="nav-item ">
       <%= link_to "Project List", qa_project_path, class: "nav-link" %>
     </li>

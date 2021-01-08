@@ -3,8 +3,10 @@
   <p class="lead"><%= user.email %></p>
   <p class="lead"><%= user.role %></p>
   <hr class="my-4">
-  <p class="lead text-center">
-    <%= link_to "Remove user from project" , delete_user_project_path(user,params[:id]) , method:"delete",data:{confirm: "Are you sure?"}, class: "btn btn-outline-warning" %>
-  </p>
+  <% if can? :delete_user_project, ProjectsController %>
+    <p class="lead text-center">
+      <%= link_to "Remove user from project", delete_user_project_path(user, params[:id]), method: "delete", data: { confirm: "Are you sure?" }, class: "btn btn-outline-warning" %>
+    </p>
+  <% end %>
 </div>
 
