@@ -1,23 +1,13 @@
 class ProjectsController < ApplicationController
   def index
     @user = User.find(current_user.id)
-    # Developer or Manager
-    if @user.role == "#{User.user_role.keys[0]}" || @user.role == "#{User.user_role.keys[1]}"
-      @projects = @user.projects.paginate(page: params[:page], per_page: 5)
-      # QA
-    elsif @user.role == "#{User.user_role.keys[2] }" # QA
-      @projects = Project.paginate(page: params[:page], per_page: 5)
-    else
-      @projects = nil?
-    end
+    @projects = @user.projects.paginate(page: params[:page], per_page: 5)
     authorize! :index, ProjectsController
   end
-
   def new
     @project = Project.new
     authorize! :new, ProjectsController
   end
-
   def create
     authorize! :create, ProjectsController
     @project = Project.new(project_params)
@@ -30,7 +20,6 @@ class ProjectsController < ApplicationController
       render 'new'
     end
   end
-
   def show
     authorize! :show, ProjectsController
     @project = Project.friendly.find(params[:id])
