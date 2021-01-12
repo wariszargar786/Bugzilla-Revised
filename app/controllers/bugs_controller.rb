@@ -49,7 +49,6 @@ class BugsController < ApplicationController
 
   def assign_developer_to_bug
     authorize! :assign_developer_to_bug, BugsController
-    session[:notice] = nil
     message = "Bug successfully assign to user"
     @bug_users = BugUser.new(bu_user_params)
     @bug = Bug.friendly.find(params[:id])
@@ -63,14 +62,13 @@ class BugsController < ApplicationController
       flash[:notice] = message
       redirect_to project_path(@bug.project_id)
     else
-      session[:notice] =  "Please provide both user & date time"
+      flash[:alert] =  "Please provide both user & date time"
       render 'assign_developer'
     end
   end
 
   def reassign_developer_to_bug
     authorize! :reassign_developer_to_bug, BugsController
-    session[:notice] = nil
     message = "Bug successfully assign to user"
     @bug_users = BugUser.new(bu_user_params)
     @bug = Bug.friendly.find(params[:id])
@@ -84,7 +82,7 @@ class BugsController < ApplicationController
       flash[:notice] = message
       redirect_to project_path(@bug.project_id)
     else
-      session[:notice] =  "Please provide both user & date time"
+      flash[:alert] =  "Please provide both user & date time"
       render 'assign_developer'
     end
   end
