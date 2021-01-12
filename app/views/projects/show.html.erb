@@ -24,11 +24,9 @@
       <a class="nav-link active" data-toggle="tab" href="#listOfBugs">List of Bugs</a>
     </li>
   <% end %>
-  <% if can? :show_list_user, ProjectsController %>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#listOfUser">List of User</a>
-    </li>
-  <% end %>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#listOfUser">List of User</a>
+  </li>
 </ul>
 <div class="tab-content">
   <div id="listOfBugs" class="container tab-pane active"><br>
@@ -45,7 +43,7 @@
     <% if @users.count <= 0 %>
       <h4 class="text-center">No user link with this project</h4>
     <% end %>
-    <div class="row">
+    <div class="container">
       <%= render partial: 'user', collection: @users %>
     </div>
   </div>
