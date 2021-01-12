@@ -2,6 +2,7 @@
   <li class="nav-item ">
     <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>
   </li>
+
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Project
@@ -15,4 +16,9 @@
       <% end %>
     </div>
   </li>
+  <% if can? :show_list_of_bugs, ProjectsController %>
+    <li class="nav-item ">
+      <%= link_to "List of Bugs", show_list_of_bugs_path, class: "nav-link" %>
+    </li>
+  <% end %>
 </ul>

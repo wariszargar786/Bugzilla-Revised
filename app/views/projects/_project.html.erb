@@ -18,6 +18,8 @@
     <% if can? :add_user, ProjectsController %>
       <%= link_to "Assign User", add_user_path(project), class: "btn btn-outline-danger" %>
     <% end %>
-
+    <% if can? :new, BugsController %>
+      <%= link_to "Report Bug", bug_new_path(project), class: "btn btn-outline-danger" %>
+    <% end %>
   </p>
 </div>

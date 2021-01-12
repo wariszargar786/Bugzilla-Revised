@@ -82,6 +82,11 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
+  def show_list_of_bugs
+    @user = User.find(current_user.id)
+    @projects = @user.projects
+  end
+
   private
 
   def project_params

@@ -1,0 +1,19 @@
+<div class="col-4 mb-3">
+  <div class="card">
+    <% if bug.image_url %>
+      <img class="card-img-top" src="<%= bug.image ? bug.image_url : "" %>" alt="<%= bug.title %>">
+    <% else %>
+      <%= image_tag('/no-image.jpg', :class => "card-img-top") %>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title"><%= bug.title %></h5>
+      <p class="card-text"><%= bug.description %></p>
+      <p class="card-text"><b>Project Title : </b>  <%= project.title %> </p>
+      <p class="card-text"><b>Bug Type : </b>  <%= bug.bug_type %> </p>
+      <p class="card-text"><b>Bug Status : </b>  <%= bug.status %> </p>
+      <p class="card-text"><b>Created By : </b>  <%= bug.user.name %> </p>
+      <p class="card-text"><b>User to Assign : </b>  <%= bug.bug_users.first.user.name if bug.bug_users.first %>
+      </p>
+    </div>
+  </div>
+</div>
