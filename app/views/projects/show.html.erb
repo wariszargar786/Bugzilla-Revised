@@ -37,7 +37,7 @@
     <% end %>
     <div class="row">
       <% @project.bugs.each do |bug| %>
-        <%= render 'shared/bugs/bugs', bug: bug, project: @project %>
+        <%= render 'shared/bugs/bugs', bug: bug, project: @project, isShowProjectButton: false %>
       <% end %>
     </div>
   </div>

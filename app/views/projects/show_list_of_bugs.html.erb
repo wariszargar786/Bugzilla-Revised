@@ -15,7 +15,7 @@
     <div class="row">
       <% @projects.each do |project| %>
         <% project.bugs.each do |bug| %>
-          <%= render 'shared/bugs/bugs', bug: bug, project: project %>
+          <%= render 'shared/bugs/bugs', bug: bug, project: project, isShowProjectButton: true %>
         <% end %>
       <% end %>
     </div>
@@ -25,7 +25,7 @@
       <% @projects.each do |project| %>
         <% project.bugs.each do |bug| %>
           <% if bug.status == "#{Bug.bug_status_list.keys[2]}" || bug.status == "#{Bug.bug_status_list.keys[3]}" %>
-            <%= render 'shared/bugs/bugs', bug: bug, project: project %>
+            <%= render 'shared/bugs/bugs', bug: bug, project: project, isShowProjectButton: true %>
           <% end %>
         <% end %>
       <% end %>
@@ -36,7 +36,7 @@
       <% @projects.each do |project| %>
         <% project.bugs.each do |bug| %>
           <% if bug.status == "#{Bug.bug_status_list.keys[0]}" || bug.status == "#{Bug.bug_status_list.keys[1]}" %>
-            <%= render 'shared/bugs/bugs', bug: bug, project: project %>
+            <%= render 'shared/bugs/bugs', bug: bug, project: project, isShowProjectButton: true %>
           <% end %>
         <% end %>
       <% end %>

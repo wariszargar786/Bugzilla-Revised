@@ -8,13 +8,15 @@
     <div class="card-body">
       <h5 class="card-title"><%= bug.title %></h5>
       <p class="card-text"><%= bug.description %></p>
-      <p class="card-text"><b>Project Title : </b>  <%= project.title %> </p>
+      <% if isShowProjectButton  %>
+        <p class="card-text"><b>Project Title : </b>  <%= project.title %> </p>
+      <% end %>
       <p class="card-text"><b>Bug Type : </b>  <%= bug.bug_type %> </p>
       <p class="card-text"><b>Bug Status : </b>  <%= bug.status %> </p>
       <p class="card-text"><b>Created By : </b>  <%= bug.user.name %> </p>
       <% if bug.bug_users.first %>
         <p class="card-text"><b>User to Assign : </b>  <%= bug.bug_users.first.user.name if bug.bug_users.first %></p>
-        <% else %>
+      <% else %>
         <p class="card-text"><b>User to Assign : </b> Not Assign</p>
       <% end %>
       <div class="text-center">
@@ -39,6 +41,9 @@
             <% end %>
           <% end %>
         <% end %>
+        <% if isShowProjectButton  %>
+          <%= link_to "Show Project", project_path(project), class: "btn btn-outline-primary" %>
+      <% end %>
       </div>
     </div>
   </div>
