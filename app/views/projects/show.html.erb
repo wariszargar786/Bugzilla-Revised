@@ -11,7 +11,7 @@
       <%= link_to "Delete", project_path(@project), method: "delete", data: { confirm: "Are you sure?" }, class: "btn btn-outline-warning" %>
     <% end %>
     <% if can? :add_user, ProjectsController %>
-      <%= link_to "Assign User", add_user_path(@project), class: "btn btn-outline-danger" %>
+      <%= link_to "Add User", add_user_path(@project), class: "btn btn-outline-danger" %>
     <% end %>
     <% if can? :new, BugsController %>
       <%= link_to "Report Bug", bug_new_path(@project), class: "btn btn-outline-danger" %>
@@ -33,13 +33,13 @@
 <div class="tab-content">
   <div id="listOfBugs" class="container tab-pane active"><br>
     <% if @project.bugs.count <= 0 %>
-      <h4 class="text-center">No bug list with this project</h4>
+      <h4 class="text-center">No bug link with this project</h4>
     <% end %>
     <%= render partial: 'bug', collection: @project.bugs %>
   </div>
   <div id="listOfUser" class="container tab-pane fade"><br>
     <% if @users.count <= 0 %>
-      <h4 class="text-center">No user list with this project</h4>
+      <h4 class="text-center">No user link with this project</h4>
     <% end %>
     <%= render partial: 'user', collection: @users %>
   </div>

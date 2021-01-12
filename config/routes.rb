@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'project/:id/assign', to: 'projects#add_user_post', as: "add_user_post"
   delete 'delete_user_project/:uid/:pid', to: 'projects#delete_user_project', as: "delete_user_project"
   get 'bugs/list', to: 'projects#show_list_of_bugs', as: "show_list_of_bugs"
+  get 'user/list/:id', to: 'projects#get_user_lists', as:'get_user_lists'
   # routes for QA role
   get 'bug/:id/new', to:'bugs#new', as:"bug_new"
   post 'bug/:id/new', to:'bugs#create', as:"bugs"

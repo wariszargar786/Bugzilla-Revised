@@ -47,11 +47,15 @@ class ProjectsController < ApplicationController
     @users = User.where(role: [User.user_role.keys[0], User.user_role.keys[2]])
   end
 
+  def get_user_lists
+    users = User.where(role: params[:id])
+    render json: users
+  end
   def add_user_post
     authorize! :add_user_post, ProjectsController
     anything = params.require(:anything).permit(:user_id, :project_id)
     project = Project.friendly.find(anything['project_id'])
-    user = User.friendly.find(anything['user_id'])
+    user = User.find(anything['user_id'])
     message = "This user #{user.name} already link with this project"
     if project.users.where(id: user).count <= 0
       user.projects << project
