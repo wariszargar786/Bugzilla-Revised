@@ -7,7 +7,6 @@ class Ability
         can :show, ProjectsController
         can :show_list_bugs, BugsController
         can :show_list_of_bugs, ProjectsController
-
       end
       if user.Developer?
         can :solved, DeveloperProjectsController

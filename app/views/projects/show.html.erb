@@ -35,13 +35,19 @@
     <% if @project.bugs.count <= 0 %>
       <h4 class="text-center">No bug link with this project</h4>
     <% end %>
-    <%= render partial: 'bug', collection: @project.bugs %>
+    <div class="row">
+      <% @project.bugs.each do |bug| %>
+        <%= render 'shared/bugs/bugs', bug: bug, project: @project %>
+      <% end %>
+    </div>
   </div>
   <div id="listOfUser" class="container tab-pane fade"><br>
     <% if @users.count <= 0 %>
       <h4 class="text-center">No user link with this project</h4>
     <% end %>
-    <%= render partial: 'user', collection: @users %>
+    <div class="row">
+      <%= render partial: 'user', collection: @users %>
+    </div>
   </div>
 </div>
 <%= render 'shared/pagination', pagination: @users %>

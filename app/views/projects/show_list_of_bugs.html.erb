@@ -3,62 +3,43 @@
     <a class="nav-link active" data-toggle="tab" href="#all">All Bugs</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#notassign">Not Assign Bugs</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#assign">Assign Bugs</a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#solved">Solved Bugs</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#notsolved">Not Solved</a>
   </li>
-
 </ul>
 
-<div class="tab-content row">
-  <div id="all" class="container tab-pane active"><br>
-    <% @projects.each do |project| %>
-      <% project.bugs.each do |bug| %>
-        <%= render 'shared/bugs/bugs', bug: bug, project: project %>
-      <% end %>
-    <% end %>
-  </div>
-  <div id="solved" class="container tab-pane fade"><br>
-    <% @projects.each do |project| %>
-      <% project.bugs.each do |bug| %>
-        <% if bug.status == "#{Bug.bug_status_list.keys[2]}" || bug.status == "#{Bug.bug_status_list.keys[3]}" %>
+<div class="tab-content mt-5 mb-5">
+  <div id="all" class="container tab-pane active">
+    <div class="row">
+      <% @projects.each do |project| %>
+        <% project.bugs.each do |bug| %>
           <%= render 'shared/bugs/bugs', bug: bug, project: project %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
-  <div id="notsolved" class="container tab-pane fade"><br>
-    <% @projects.each do |project| %>
-      <% project.bugs.each do |bug| %>
-        <% if bug.status == "#{Bug.bug_status_list.keys[0]}" || bug.status == "#{Bug.bug_status_list.keys[1]}" %>
-          <%= render 'shared/bugs/bugs', bug: bug, project: project %>
+  <div id="solved" class="container tab-pane fade">
+    <div class="row">
+      <% @projects.each do |project| %>
+        <% project.bugs.each do |bug| %>
+          <% if bug.status == "#{Bug.bug_status_list.keys[2]}" || bug.status == "#{Bug.bug_status_list.keys[3]}" %>
+            <%= render 'shared/bugs/bugs', bug: bug, project: project %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
-  <div id="assign" class="container tab-pane fade"><br>
-    <% @projects.each do |project| %>
-      <% project.bugs.each do |bug| %>
-        <% if !bug.user %>
-          <%= render 'shared/bugs/bugs', bug: bug, project: project %>
+  <div id="notsolved" class="container tab-pane fade">
+    <div class="row">
+      <% @projects.each do |project| %>
+        <% project.bugs.each do |bug| %>
+          <% if bug.status == "#{Bug.bug_status_list.keys[0]}" || bug.status == "#{Bug.bug_status_list.keys[1]}" %>
+            <%= render 'shared/bugs/bugs', bug: bug, project: project %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <div id="notassign" class="container tab-pane fade"><br>
-    <% @projects.each do |project| %>
-      <% project.bugs.each do |bug| %>
-        <% if bug.user %>
-          <%= render 'shared/bugs/bugs', bug: bug, project: project %>
-        <% end %>
-      <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
