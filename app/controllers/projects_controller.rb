@@ -53,16 +53,22 @@ class ProjectsController < ApplicationController
   end
   def add_user_post
     authorize! :add_user_post, ProjectsController
-    anything = params.require(:anything).permit(:user_id, :project_id)
-    project = Project.friendly.find(anything['project_id'])
-    user = User.find(anything['user_id'])
-    message = "This user #{user.name} already link with this project"
-    if project.users.where(id: user).count <= 0
-      user.projects << project
-      message = "This user #{user.name} link with this project"
+    anything = params.require(:anything).permit(:user_id)
+    if anything[:user_id] == "" || params[:id] == ""
+      flash[:alert] = "Please select user first"
+      render 'add_user'
+    else
+      project = Project.friendly.find(params[:id])
+      user = User.find(anything['user_id'])
+      message = "This user #{user.name} already link with this project"
+      if project.users.where(id: user).count <= 0
+        user.projects << project
+        message = "This user #{user.name} link with this project"
+      end
+      flash[:notice] = message
+      redirect_to project_path(project)
     end
-    flash[:notice] = message
-    redirect_to project_path(project)
+
   end
 
   def destroy
