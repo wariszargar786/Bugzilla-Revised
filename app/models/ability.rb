@@ -5,8 +5,6 @@ class Ability
       if user.Manager? or user.Developer? or user.QA?
         can :index, ProjectsController
         can :show, ProjectsController
-      end
-      if user.Developer? or user.QA?
         can :show_list_bugs, BugsController
       end
       if user.Developer?

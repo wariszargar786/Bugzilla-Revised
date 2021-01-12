@@ -18,14 +18,30 @@
     <% end %>
   </p>
 </div>
-<% if can? :show_list_user, ProjectsController %>
-  <h1 class="display-4 text-center">List of User Assign to this Project</h1>
-  <%= render partial: 'user', collection: @users %>
-<% end %>
-<% if can? :show_list_bugs, BugsController %>
-  <h1 class="display-4 text-center">List of BUG Related to this Project</h1>
-  <div class="row pb-5">
+<ul class="nav nav-tabs" role="tablist">
+  <% if can? :show_list_bugs, BugsController %>
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#listOfBugs">List of Bugs</a>
+    </li>
+  <% end %>
+  <% if can? :show_list_user, ProjectsController %>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#listOfUser">List of User</a>
+    </li>
+  <% end %>
+</ul>
+<div class="tab-content">
+  <div id="listOfBugs" class="container tab-pane active"><br>
+    <% if @project.bugs.count <= 0 %>
+      <h4 class="text-center">No bug list with this project</h4>
+    <% end %>
     <%= render partial: 'bug', collection: @project.bugs %>
   </div>
-<% end %>
+  <div id="listOfUser" class="container tab-pane fade"><br>
+    <% if @users.count <= 0 %>
+      <h4 class="text-center">No user list with this project</h4>
+    <% end %>
+    <%= render partial: 'user', collection: @users %>
+  </div>
+</div>
 <%= render 'shared/pagination', pagination: @users %>
