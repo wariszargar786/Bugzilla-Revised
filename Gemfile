@@ -57,3 +57,4 @@ gem 'will_paginate', '~> 3.3'
 gem 'bootstrap-will_paginate', '~> 1.0'
 gem 'carrierwave', '~> 2.0'
 gem "cancan"
+gem "figaro"
