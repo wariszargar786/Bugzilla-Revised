@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  Rails.application.routes.default_url_options[:host] = "https://bugzillaproject.herokuapp.com/"
+  Rails.application.routes.default_url_options[:host] = "http://127.0.0.1:3000"
+  # Rails.application.routes.default_url_options[:host] = "https://bugzillaproject.herokuapp.com/"
   # root route or landing page or home page
   root :to => redirect("/login")
   # routes for login registration edit account logout etc
