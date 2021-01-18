@@ -17,4 +17,7 @@ class User < ApplicationRecord
   def self.user_role
     { Developer: 1, Manager: 2, QA: 3 }
   end
+
+
+
 end

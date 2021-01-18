@@ -1,5 +1,7 @@
 class Bug < ApplicationRecord
   mount_uploader :image, AttachmentUploader # Tells rails to use this uploader for this model.
+  scope :created_between, lambda {|start_date, end_date| where("created_at >= ? AND created_at <= ?", start_date, end_date )}
+
   belongs_to :user
   belongs_to :project
   has_many :bug_users

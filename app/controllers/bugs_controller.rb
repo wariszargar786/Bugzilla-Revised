@@ -10,6 +10,9 @@ class BugsController < ApplicationController
     @bug[:user_id] = current_user.id
     @bug[:project_id] = @project.id
     authorize! :create, BugsController
+    if @bug[:status] == "#{Bug.bug_status_list.keys[2]}" || @bug[:status] == "#{Bug.bug_status_list.keys[3]}"
+      @bug[:completed_at] = DateTime.now
+    end
     if @bug.save
       flash[:notice] = 'Bug successfully created'
       redirect_to project_path(@project)
@@ -26,8 +29,16 @@ class BugsController < ApplicationController
   def update
     authorize! :update, BugsController
     @bug = Bug.friendly.find(params[:id])
+    status = ""
+    if @bug[:status] == "#{Bug.bug_status_list.keys[2]}" || @bug[:status] == "#{Bug.bug_status_list.keys[3]}"
+      status ="*-*-*-- if *-*-*-*"
+      @bug[:completed_at] = DateTime.now
+    else
+      status ="*-*-*-- else *-*-*-*"
+      @bug[:completed_at] = nil?
+    end
     if @bug.update(bug_params)
-      flash[:notice] = "Bug updated successfully"
+      flash[:notice] = "Bug updated successfully #{status}"
       redirect_to project_path(@bug.project_id)
     else
       render 'edit'

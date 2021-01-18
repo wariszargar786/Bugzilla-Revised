@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   Rails.application.routes.default_url_options[:host] = "http://127.0.0.1:3000"
+  get 'schedual', to: 'scheduales#send_email'
+
   # Rails.application.routes.default_url_options[:host] = "https://bugzillaproject.herokuapp.com/"
   # root route or landing page or home page
   root :to => redirect("/login")
