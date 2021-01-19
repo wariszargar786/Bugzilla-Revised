@@ -29,16 +29,13 @@ class BugsController < ApplicationController
   def update
     authorize! :update, BugsController
     @bug = Bug.friendly.find(params[:id])
-    status = ""
     if @bug[:status] == "#{Bug.bug_status_list.keys[2]}" || @bug[:status] == "#{Bug.bug_status_list.keys[3]}"
-      status ="*-*-*-- if *-*-*-*"
       @bug[:completed_at] = DateTime.now
     else
-      status ="*-*-*-- else *-*-*-*"
       @bug[:completed_at] = nil?
     end
     if @bug.update(bug_params)
-      flash[:notice] = "Bug updated successfully #{status}"
+      flash[:notice] = "Bug updated successfully"
       redirect_to project_path(@bug.project_id)
     else
       render 'edit'

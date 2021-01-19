@@ -1,5 +1,15 @@
-<p> <b>Project Title : </b> <%= @project_title %> </p>
-<p> <b>Total no of bugs : </b> <%= @total_no_of_bugs %> </p>
-<p> <b>Total no of bugs reported today: </b> <%= @total_no_of_bugs_created_today %> </p>
-<p> <b>Total No Developer link with this Project : </b> <%= @no_of_devs %></p>
-<p> <b>Total No QA link with this Project : </b> <%= @no_of_qa %></p>
+<% count = 1 %>
+<% @project_report.each do |project_report| %>
+  <p class="email-heading-center"> <b>Project No : </b> <%= count %>  </p>
+  <br>
+  <p> <b>Project Title : </b> <%= project_report["project_title"] %> </p>
+  <p> <b>Total no of bugs : </b> <%= project_report["total_no_of_bugs"] %> </p>
+  <p> <b>Total no of bugs reported today: </b> <%= project_report["total_no_of_bugs_created_today"] %> </p>
+  <p> <b>Total no of bugs completed today: </b> <%= project_report["total_no_of_bugs_completed_today"] %> </p>
+  <p> <b>Total No Developer link with this Project : </b> <%= project_report["no_of_devs"] %></p>
+  <p> <b>Total No QA link with this Project : </b> <%= project_report["no_of_qa"] %></p>
+  <br />
+  <br />
+  <br />
+  <% count += 1 %>
+<% end %>

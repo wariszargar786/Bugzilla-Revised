@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     if @project.save
       user = User.find(current_user.id)
-      ProjectMailer.create_project(@project, user).deliver
       user.projects << @project
       flash[:notice] = "Project created successfully"
       redirect_to projects_path

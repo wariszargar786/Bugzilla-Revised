@@ -7,6 +7,11 @@ class DeveloperProjectsController < ApplicationController
     else
       @bug[:status] = Bug.bug_status_list.keys[2]
     end
+    if @bug[:status] == "#{Bug.bug_status_list.keys[2]}" || @bug[:status] == "#{Bug.bug_status_list.keys[3]}"
+      @bug[:completed_at] = DateTime.now
+    else
+      @bug[:completed_at] = nil?
+    end
     @bug.save
     @project = Project.find(@bug.project_id)
     flash[:notice] = "Mark as #{@bug.status}"
