@@ -18,6 +18,12 @@ class User < ApplicationRecord
     { Developer: 1, Manager: 2, QA: 3 }
   end
 
-
-
+ def self.send_email
+    command "echo 'My Cron Job Run In Model'"
+    # users = User.where(role: User.roles.keys[1])
+    # users.each do |user|
+    #   projects = user.projects
+    #   ScheduleMailer.send_mail(user, projects).deliver
+    # end
+  end
 end
